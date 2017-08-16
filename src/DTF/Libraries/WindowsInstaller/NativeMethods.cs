@@ -286,6 +286,11 @@ internal static class NativeMethods
         public MsiHandle(IntPtr handle, bool ownsHandle)
             : base(handle, ownsHandle)
         {
+	     Console.WriteLine("XXX: Current MsiHandle.handle is {0}", (IntPtr) this.handle);
+	     Console.WriteLine("XXX: Setting MsiHandle.handle explicitly to work with Wine + mono-2-0's SafeHandle");
+	     this.handle = (IntPtr) handle;
+	     Console.WriteLine("XXX: New MsiHandle.handle is {0}", (IntPtr) this.handle);
+	     Console.WriteLine("XXX: See https://github.com/mono/mono/blob/mono-2-0/mcs/class/corlib/System.Runtime.InteropServices/SafeHandle.cs#L68");
         }
 
         public override bool IsInvalid
